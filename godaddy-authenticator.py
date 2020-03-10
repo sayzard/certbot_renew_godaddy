@@ -3,12 +3,14 @@
 import os
 import sys
 from godaddypy import Client, Account
+import time
 
 try:
   certDOMAIN=os.environ['CERTBOT_DOMAIN']
   certVALIDATION=os.environ['CERTBOT_VALIDATION']
 except:
-  sys.exit(1)
+  # called for pre-hook
+  sys.exit(0)
 
 # Remember to set your parameters
 paramAPIKEY = 'godaddy api key'
@@ -33,8 +35,11 @@ try:
       updateResult = userClient.update_record(domain,{'data':v_record,'name':n_record,'ttl':600, 'type':'TXT'})
       if updateResult is True:
         print('Update ended with no Exception.')
+        time.sleep(30)
       else:
         print('No DNS update needed.')
 except:
   print(sys.exc_info()[1])
   sys.exit()
+
+sys.exit(0)
