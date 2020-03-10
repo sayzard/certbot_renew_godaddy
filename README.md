@@ -2,11 +2,12 @@
 certbot manual auth hook for godaddy   
 
 
-crontab -l  
+### via crontab  
 `
 00 00 * * * certbot renew --manual-auth-hook /etc/letsencrypt/renewal-hooks/pre/godaddy-authenticator.sh --cert-name yourcertname
 `
 
+### via conf
 /etc/letsencrypt/renewal/xxxxx.conf. 
 ```
 version = 0.31.0
